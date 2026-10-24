@@ -1,2 +1,15 @@
-# Plot-Seller-App
-Plot Seller App - Buy &amp; Sell Plots Online using Flask, Listing &amp; Contact Feature.
+# 🏡 Plot Seller App
+Buy & Sell Plots Online.
+
+## Features
+- Plot Listing with Image & Price
+- Search by Location & Price
+- Contact Seller
+- Admin Add Plot
+
+## Tech Stack
+Python, Flask, SQLite, HTML, CSS
+
+## How to Run
+pip install -r requirements.txt
+python app.py

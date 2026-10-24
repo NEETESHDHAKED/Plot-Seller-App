@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head><title>Plot Detail</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#F5F0E6;color:#222;padding:15px}
+.card{background:white;padding:15px;border-radius:20px;margin:10px 0;box-shadow:0 5px 15px rgba(0,0,0,0.08)}
+input{width:100%;padding:12px;margin:5px 0;border-radius:12px;border:none;background:#F0EDE6;color:#222}
+button{padding:13px;width:100%;border:none;border-radius:12px;font-weight:900}
+a{color:#FF9800;text-decoration:none;font-weight:bold}
+.row{background:#F0EDE6;padding:12px;border-radius:12px;margin:6px 0}
+.wa{background:#25D366;color:white;padding:12px;border-radius:12px;text-align:center;display:block;margin:10px 0}
+</style>
+</head>
+<body>
+<a href="/">⬅ BACK</a>
+<h1>🏠 Plot {{p.plot_no}} - {{p.size}}</h1>
+<p>{{p.location}} | Price: <b>₹{{p.price}}</b></p>
+
+<div class="card" style="background:#FF9800;color:white">
+<h2 style="margin:0">Paid: ₹{{p.paid}} | Baki: ₹{{p.baki}}</h2>
+<p>Customer: {{p.customer}} - {{p.phone}} | Status: {{p.status}}</p>
+</div>
+
+{% if p.phone %}
+<a href="{{wa_link}}" target="_blank" class="wa">💬 WHATSAPP - KIST MANGO</a>
+{% endif %}
+
+{% if p.status == "KHAAALI" %}
+<div class="card">
+<h3>🔥 PLOT BECHO - Customer Ka Naam Likho</h3>
+<form action="/sell/{{id}}" method="POST">
+<input name="customer" placeholder="Customer Ka Naam" required>
+<input name="phone" placeholder="Phone" required>
+<input name="advance" type="number" placeholder="Advance Kitna Diya - 200000" required>
+<button style="background:#FF9800;color:white">✅ PLOT BECH DIYA</button>
+</form>
+</div>
+{% else %}
+<div class="card">
+<h3>💰 KIST JAMA KARO</h3>
+<form action="/kist/{{id}}" method="POST">
+<input name="amount" type="number" placeholder="Kitna Diya - 50000" required>
+<input name="note" placeholder="Note - Jan ki kist">
+<button style="background:green;color:white">➕ KIST ADD KARO</button>
+</form>
+</div>
+{% endif %}
+
+<h3>📋 Payment History</h3>
+{% for pay in p.payments|reverse %}
+<div class="row"><b>{{pay.date}}</b> - ₹{{pay.amount}} - {{pay.note}}</div>
+{% else %}<p>Abhi koi payment nahi</p>{% endfor %}
+</body>
+</html>
